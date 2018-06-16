@@ -1,4 +1,4 @@
 package particle.go.game.model;
 
-public class Magnet {
+public class Magnet implements GamePiece {
 }
