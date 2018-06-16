@@ -1,6 +1,7 @@
 package particle.go.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
@@ -12,7 +13,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import particle.go.game.model.Grid;
 import particle.go.game.model.Magnet;
 
-public class ParticleGo extends ApplicationAdapter {
+public class ParticleGo extends Game {
 	//private SpriteBatch batch;
 	//private Texture img;
 	private ShapeRenderer mRenderer;
@@ -39,13 +40,10 @@ public class ParticleGo extends ApplicationAdapter {
 		mCamera.update();
 		mRenderer.setProjectionMatrix(mCamera.combined);
 
-		mRenderer.begin(ShapeRenderer.ShapeType.Filled);
-		mRenderer.rect(1, 1, 200, 300);
-		mRenderer.end();
 
-		//Grid g = new Grid(200, 200);
+		Grid g = new Grid(200, 200, 100, 100);
 		Magnet m = new Magnet(4, 5);
-		//g.draw(mRenderer);
+		g.draw(mRenderer);
 		m.draw(mRenderer);
 	}
 	
