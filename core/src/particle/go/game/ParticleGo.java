@@ -17,7 +17,7 @@ public class ParticleGo extends ApplicationAdapter {
 	//private Texture img;
 	private ShapeRenderer mRenderer;
 	private OrthographicCamera mCamera;
-	
+
 	@Override
 	public void create () {
 		//batch = new SpriteBatch();
@@ -43,9 +43,9 @@ public class ParticleGo extends ApplicationAdapter {
 		mRenderer.rect(1, 1, 200, 300);
 		mRenderer.end();
 
-		Grid g = new Grid(200, 200);
+		//Grid g = new Grid(200, 200);
 		Magnet m = new Magnet(4, 5);
-		g.draw(mRenderer);
+		//g.draw(mRenderer);
 		m.draw(mRenderer);
 	}
 	
@@ -53,5 +53,9 @@ public class ParticleGo extends ApplicationAdapter {
 	public void dispose () {
 //		batch.dispose();
 //		img.dispose();
+	}
+
+	public void turn () {
+
 	}
 }
