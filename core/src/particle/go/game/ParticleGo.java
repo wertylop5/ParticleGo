@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
+import particle.go.game.model.Grid;
 import particle.go.game.model.Magnet;
 
 public class ParticleGo extends ApplicationAdapter{
@@ -46,10 +47,10 @@ public class ParticleGo extends ApplicationAdapter{
 		mRenderer.setProjectionMatrix(mCamera.combined);
 
 
-		Grid g = new Grid(200, 200, 10, 10);
-		Magnet m = new Magnet(4, 5);
+		Grid g = new Grid(200, 200, 20, 20);
+		Magnet m = new Magnet(2, 1);
 		g.draw(mRenderer);
-		m.draw(mRenderer);
+		m.drawInBox(2, 1, g.getBoxWidth(), g.getBoxHeight(), mRenderer);
 	}
 	
 	@Override

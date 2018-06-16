@@ -15,7 +15,6 @@ public class Grid implements AppDrawable {
     private int mHeight;
     private int mXBoxes;
     private int mYBoxes;
-    private float fractOfScreen = .75f; //fraction of the screen for the grid to take up
 
     public Grid(int x, int y, int xBoxes, int yBoxes) {
         mParticles = new Array<Particle>();
@@ -27,7 +26,7 @@ public class Grid implements AppDrawable {
 
         int tWidth = Gdx.graphics.getWidth();
         int tHeight = Gdx.graphics.getHeight();
-        mHeight = mWidth = tWidth < tHeight ? tWidth/2 : tHeight/2;
+        mHeight = mWidth = tWidth < tHeight ? tWidth : tHeight;
     }
 
     public int[] screen_to_grid(int x, int y){
@@ -48,8 +47,8 @@ public class Grid implements AppDrawable {
 
     @Override
     public void draw(ShapeRenderer renderer) {
-        int boxWidth = mWidth/ mXBoxes;
-        int boxHeight = mHeight/ mYBoxes;
+        float boxWidth = getBoxWidth();
+        float boxHeight = getBoxHeight();
 
         float xScale = Gdx.graphics.getWidth()/mWidth;
         float yScale = Gdx.graphics.getHeight()/mHeight;
@@ -61,11 +60,19 @@ public class Grid implements AppDrawable {
 //        boolean xBig = Gdx.graphics.getWidth() > Gdx.graphics.getHeight();
 
         renderer.begin(ShapeRenderer.ShapeType.Line);
-        for (int x = 0; x < boxWidth; x++) {
-            for (int y = 0; y < boxHeight; y++) {
+        for (int x = 0; x < mXBoxes; x++) {
+            for (int y = 0; y < mYBoxes; y++) {
                 renderer.rect(x*boxWidth, y*boxHeight, boxWidth, boxHeight);
             }
         }
         renderer.end();
+    }
+
+    public float getBoxWidth() {
+        return mWidth/ mXBoxes;
+    }
+
+    public float getBoxHeight() {
+        return mHeight/ mYBoxes;
     }
 }

@@ -1,6 +1,8 @@
 package particle.go.game.model;
 
-public class Particle {
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+
+public class Particle implements AppDrawable {
     double[] position;
     double[] velocity;
     double mass = 1.0;
@@ -48,5 +50,8 @@ public class Particle {
         position[1] += velocity[1] * delta;
     }
 
-    public void draw(){}
+    @Override
+    public void draw(ShapeRenderer renderer){
+
+    }
 }
