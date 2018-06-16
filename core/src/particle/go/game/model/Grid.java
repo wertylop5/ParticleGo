@@ -28,6 +28,7 @@ public class Grid implements AppDrawable {
         int[] grid_coords = new int[2];
         grid_coords[0] = (x-mx) * x_boxes / mWidth;
         grid_coords[1] = (y-my) * y_boxes / mHeight;
+        return grid_coords;
     }
 
     public void updateGrid() {
