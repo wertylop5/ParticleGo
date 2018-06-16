@@ -30,7 +30,7 @@ public class Grid implements AppDrawable {
     @Override
     public void draw(ShapeRenderer renderer) {
         renderer.begin(ShapeRenderer.ShapeType.Line);
-        renderer.rect(10, 20, 200, 300);
+        renderer.rect(0, 0, 200, 300);
         renderer.end();
     }
 }
