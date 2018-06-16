@@ -3,7 +3,7 @@ package particle.go.game.model;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
 
-public class Grid implements AppDrawable{
+public class Grid implements AppDrawable {
     private Array<Particle> mParticles;
     private Array<GamePiece> mPieces;
 
@@ -27,9 +27,10 @@ public class Grid implements AppDrawable{
         }
     }
 
+    @Override
     public void draw(ShapeRenderer renderer) {
-        renderer.begin(ShapeRenderer.ShapeType.Filled);
-        renderer.rect(10, 20, 20, 30);
+        renderer.begin(ShapeRenderer.ShapeType.Line);
+        renderer.rect(10, 20, 200, 300);
         renderer.end();
     }
 }
