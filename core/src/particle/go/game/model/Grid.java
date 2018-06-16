@@ -19,11 +19,11 @@ public class Grid implements AppDrawable {
     }
 
     public void updateGrid() {
-        for (GamePiece m : mPieces) {
-            for (Particle p : mParticles) {
+        for (Particle p : mParticles) {
+            for (GamePiece m : mPieces) {
                 //p.updateParticle(m);
-                //p.move();
             }
+            //p.move();
         }
     }
 
