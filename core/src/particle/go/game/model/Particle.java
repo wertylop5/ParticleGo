@@ -3,11 +3,13 @@ package particle.go.game.model;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Particle implements AppDrawable {
-    double[] position;
-    double[] velocity;
-    double mass = 1.0;
-    double charge = 1.0;
-    double delta = 0.1;
+    private static final float RADIUS = 10f;
+
+    private double[] position;
+    private double[] velocity;
+    private double mass = 1.0;
+    private double charge = 1.0;
+    private double delta = 0.1;
 
     Particle(double px, double py, double vx, double vy){
         position = new double[2];
@@ -52,6 +54,8 @@ public class Particle implements AppDrawable {
 
     @Override
     public void draw(ShapeRenderer renderer){
-
+        renderer.begin(ShapeRenderer.ShapeType.Filled);
+        renderer.circle((float)position[0], (float)position[1], RADIUS);
+        renderer.end();
     }
 }

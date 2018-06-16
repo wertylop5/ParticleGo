@@ -61,11 +61,9 @@ public class ParticleGo extends ApplicationAdapter{
 		mCamera.update();
 		mRenderer.setProjectionMatrix(mCamera.combined);
 
-
-		Grid g = new Grid(200, 200, 20, 20);
 		Magnet m = new Magnet(2, 1);
-		g.draw(mRenderer);
-		m.drawInBox(2, 1, g.getBoxWidth(), g.getBoxHeight(), mRenderer);
+		grid.draw(mRenderer);
+		m.drawInBox(2, 1, grid.getBoxWidth(), grid.getBoxHeight(), mRenderer);
 	}
 	
 	@Override

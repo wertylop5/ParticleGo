@@ -65,15 +65,6 @@ public class Grid implements AppDrawable {
         float boxWidth = getBoxWidth();
         float boxHeight = getBoxHeight();
 
-        float xScale = Gdx.graphics.getWidth()/mWidth;
-        float yScale = Gdx.graphics.getHeight()/mHeight;
-
-//        float smallScale = xScale < yScale ? xScale : yScale;
-//        float bigScale = xScale > yScale ? xScale*Gdx.graphics.getWidth() :
-//                yScale*Gdx.graphics.getHeight();
-//
-//        boolean xBig = Gdx.graphics.getWidth() > Gdx.graphics.getHeight();
-
         renderer.begin(ShapeRenderer.ShapeType.Line);
         for (int x = 0; x < mXBoxes; x++) {
             for (int y = 0; y < mYBoxes; y++) {
@@ -90,4 +81,6 @@ public class Grid implements AppDrawable {
     public float getBoxHeight() {
         return mHeight/ mYBoxes;
     }
+
+    public float getLowerX() { return mx; }
 }
