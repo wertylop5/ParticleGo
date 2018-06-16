@@ -31,7 +31,7 @@ public class ParticleGo extends ApplicationAdapter {
 //		batch.end();
 
 		Grid g = new Grid(200, 200);
-		Magnet m = new Magnet();
+		Magnet m = new Magnet(4, 5);
 		g.draw(mRenderer);
 		m.draw(mRenderer);
 	}
