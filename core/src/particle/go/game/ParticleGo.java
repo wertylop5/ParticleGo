@@ -26,7 +26,7 @@ public class ParticleGo extends ApplicationAdapter{
 		//img = new Texture("badlogic.jpg");
 		mRenderer = new ShapeRenderer();
 		mCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		grid = new Grid(200, 200, 100, 100);
+		grid = new Grid(200, 200, 10, 10);
 		players = new Player[2];
 		for (int i = 0; i < 2; i++)
 			players[i] = new Player();

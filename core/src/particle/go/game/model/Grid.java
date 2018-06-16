@@ -19,21 +19,21 @@ public class Grid implements AppDrawable {
     public Grid(int x, int y, int xBoxes, int yBoxes) {
         mParticles = new Array<Particle>();
         mPieces = new Array<GamePiece>();
-        isPieceThere = new boolean[mXBoxes][mYBoxes];
+        isPieceThere = new boolean[xBoxes][yBoxes];
         mx = x;
         my = y;
         mXBoxes = xBoxes;
         mYBoxes = yBoxes;
 
-        int tWidth = Gdx.graphics.getWidth();
-        int tHeight = Gdx.graphics.getHeight();
+        int tWidth = Gdx.graphics.getWidth() - mx;
+        int tHeight = Gdx.graphics.getHeight() - my;
         mHeight = mWidth = tWidth < tHeight ? tWidth : tHeight;
     }
 
     public int[] screen_to_grid(int x, int y){
         int[] grid_coords = new int[2];
-        grid_coords[0] = (x-mx) * mXBoxes / mWidth;
-        grid_coords[1] = (y-my) * mYBoxes / mHeight;
+        grid_coords[0] = (x-mx) / (int) getBoxWidth();
+        grid_coords[1] = (y-my) / (int) getBoxHeight();
         return grid_coords;
     }
 
@@ -42,9 +42,9 @@ public class Grid implements AppDrawable {
         int grid_x = grid_coords[0];
         int grid_y = grid_coords[1];
         if (0 <= grid_x && grid_x < mXBoxes &&
-                0 <= grid_y && grid_y <= mYBoxes &&
+                0 <= grid_y && grid_y < mYBoxes &&
                 !isPieceThere[grid_x][grid_y]) {
-            mPieces.add(new Magnet(x, y));
+            mPieces.add(new Magnet(grid_x, grid_y));
             isPieceThere[grid_x][grid_y] = true;
             return true;
         }
