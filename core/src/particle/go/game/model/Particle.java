@@ -7,6 +7,15 @@ public class Particle {
     double charge = 1.0;
     double delta = 0.1;
 
+    new Particle(double px, double py, double vx, double vy){
+        position = new double[2];
+        velocity = new double[2];
+        position[0] = px;
+        position[1] = py;
+        velocity[0] = vx;
+        velocity[1] = vy;
+    }
+
     private void normalize(double array[]){
         double mag = magnitude(array);
         for (int i = 0; i < array.length; i++){
