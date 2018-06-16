@@ -4,12 +4,8 @@ import com.badlogic.gdx.InputAdapter;
 
 public class Player extends InputAdapter {
 
-    public void addMagnet(Grid grid){
-        
-    }
-
-    public void turn (Grid grid) {
-
+    public boolean turn (Grid grid, int x, int y) {
+        return grid.addMagnet(x, y);
     }
 
 }

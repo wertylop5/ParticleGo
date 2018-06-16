@@ -19,6 +19,7 @@ public class Grid implements AppDrawable {
     public Grid(int x, int y, int xBoxes, int yBoxes) {
         mParticles = new Array<Particle>();
         mPieces = new Array<GamePiece>();
+        isPieceThere = new boolean[mXBoxes][mYBoxes];
         mx = x;
         my = y;
         mXBoxes = xBoxes;
@@ -33,7 +34,21 @@ public class Grid implements AppDrawable {
         int[] grid_coords = new int[2];
         grid_coords[0] = (x-mx) * mXBoxes / mWidth;
         grid_coords[1] = (y-my) * mYBoxes / mHeight;
-        return null;
+        return grid_coords;
+    }
+
+    public boolean addMagnet(int x, int y) {
+        int[] grid_coords = screen_to_grid(x, y);
+        int grid_x = grid_coords[0];
+        int grid_y = grid_coords[1];
+        if (0 <= grid_x && grid_x < mXBoxes &&
+                0 <= grid_y && grid_y <= mYBoxes &&
+                !isPieceThere[grid_x][grid_y]) {
+            mPieces.add(new Magnet(x, y));
+            isPieceThere[grid_x][grid_y] = true;
+            return true;
+        }
+        return false;
     }
 
     public void updateGrid() {
