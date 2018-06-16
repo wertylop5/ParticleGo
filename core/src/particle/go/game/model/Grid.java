@@ -68,19 +68,18 @@ public class Grid implements AppDrawable {
         renderer.begin(ShapeRenderer.ShapeType.Line);
         for (int x = 0; x < mXBoxes; x++) {
             for (int y = 0; y < mYBoxes; y++) {
-                renderer.rect(x*boxWidth, y*boxHeight, boxWidth, boxHeight);
+                renderer.rect(mx+x*boxWidth, my+y*boxHeight, boxWidth, boxHeight);
             }
         }
         renderer.end();
     }
 
-    public float getBoxWidth() {
-        return mWidth/ mXBoxes;
-    }
+    public float getBoxWidth() { return (mWidth-mx)/ mXBoxes; }
+    public float getBoxHeight() { return (mHeight-my)/ mYBoxes; }
 
-    public float getBoxHeight() {
-        return mHeight/ mYBoxes;
-    }
+    public int getLowerX() { return mx; }
+    public int getLowery() { return my; }
 
-    public float getLowerX() { return mx; }
+    public float getMaxX() { return mx+mXBoxes*mWidth; }
+    public float getMaxY() { return my+mYBoxes*mHeight; }
 }

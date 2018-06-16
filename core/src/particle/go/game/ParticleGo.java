@@ -63,7 +63,8 @@ public class ParticleGo extends ApplicationAdapter{
 
 		Magnet m = new Magnet(2, 1);
 		grid.draw(mRenderer);
-		m.drawInBox(2, 1, grid.getBoxWidth(), grid.getBoxHeight(), mRenderer);
+		m.drawInBox(grid.getLowerX(), grid.getLowery(), 2, 1,
+				grid.getBoxWidth(), grid.getBoxHeight(), mRenderer);
 	}
 	
 	@Override
