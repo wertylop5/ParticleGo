@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import particle.go.game.model.Grid;
-import particle.go.game.model.Magnet;
 import particle.go.game.model.Player;
 
 public class ParticleGo extends ApplicationAdapter{
@@ -55,16 +54,13 @@ public class ParticleGo extends ApplicationAdapter{
 //		batch.begin();
 //		batch.draw(img, 0, 0);
 //		batch.end();
-		mCamera.setToOrtho(false, mCamera.viewportWidth, mCamera.viewportHeight);
+		mCamera.setToOrtho(true, mCamera.viewportWidth, mCamera.viewportHeight);
 		mCamera.position.set(mCamera.viewportWidth/2, mCamera.viewportHeight/2, 0);
 		//mCamera.zoom = 2f;
 		mCamera.update();
 		mRenderer.setProjectionMatrix(mCamera.combined);
 
-		Magnet m = new Magnet(2, 1);
 		grid.draw(mRenderer);
-		m.drawInBox(grid.getLowerX(), grid.getLowery(), 2, 1,
-				grid.getBoxWidth(), grid.getBoxHeight(), mRenderer);
 	}
 	
 	@Override
