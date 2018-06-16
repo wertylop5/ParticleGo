@@ -3,17 +3,14 @@ package particle.go.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-import particle.go.game.model.Grid;
 import particle.go.game.model.Magnet;
 
-public class ParticleGo extends Game {
+public class ParticleGo extends ApplicationAdapter{
 	//private SpriteBatch batch;
 	//private Texture img;
 	private ShapeRenderer mRenderer;
@@ -25,6 +22,14 @@ public class ParticleGo extends Game {
 		//img = new Texture("badlogic.jpg");
 		mRenderer = new ShapeRenderer();
 		mCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        Gdx.input.setInputProcessor(new InputAdapter() {
+            @Override
+            public boolean touchDown (int x, int y, int pointer, int button) {
+                // your touch down code here
+                return true; // return true to indicate the event was handled
+            }
+        });
 	}
 
 	@Override
@@ -51,9 +56,5 @@ public class ParticleGo extends Game {
 	public void dispose () {
 //		batch.dispose();
 //		img.dispose();
-	}
-
-	public void turn () {
-
 	}
 }
