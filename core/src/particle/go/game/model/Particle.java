@@ -7,7 +7,7 @@ public class Particle {
     double charge = 1.0;
     double delta = 0.1;
 
-    new Particle(double px, double py, double vx, double vy){
+    Particle(double px, double py, double vx, double vy){
         position = new double[2];
         velocity = new double[2];
         position[0] = px;
