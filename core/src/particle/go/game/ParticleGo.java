@@ -34,14 +34,14 @@ public class ParticleGo extends Game {
 //		batch.begin();
 //		batch.draw(img, 0, 0);
 //		batch.end();
-		mCamera.setToOrtho(false);
+		mCamera.setToOrtho(false, mCamera.viewportWidth, mCamera.viewportHeight);
 		mCamera.position.set(mCamera.viewportWidth/2, mCamera.viewportHeight/2, 0);
 		//mCamera.zoom = 2f;
 		mCamera.update();
 		mRenderer.setProjectionMatrix(mCamera.combined);
 
 
-		Grid g = new Grid(200, 200, 100, 100);
+		Grid g = new Grid(200, 200, 10, 10);
 		Magnet m = new Magnet(4, 5);
 		g.draw(mRenderer);
 		m.draw(mRenderer);
