@@ -1,5 +1,8 @@
 package particle.go.game.model;
 
 public class Player {
-    //hello
+
+    public void addMagnet(Grid grid){
+
+    }
 }
