@@ -17,8 +17,9 @@ public class Grid implements AppDrawable {
     private int mHeight;
     private int mXBoxes;
     private int mYBoxes;
+    private int mScoring_cols;
 
-    public Grid(int x, int y, int xBoxes, int yBoxes) {
+    public Grid(int x, int y, int xBoxes, int yBoxes, int scoring_cols, int num_particles) {
         mParticles = new Array<Particle>();
         mPieces = new Array<GamePiece>();
         isPieceThere = new boolean[xBoxes][yBoxes];
@@ -27,10 +28,23 @@ public class Grid implements AppDrawable {
         my = y;
         mXBoxes = xBoxes;
         mYBoxes = yBoxes;
+        mScoring_cols = scoring_cols;
 
         int tWidth = Gdx.graphics.getWidth() - mx;
         int tHeight = Gdx.graphics.getHeight() - my;
         mHeight = mWidth = tWidth < tHeight ? tWidth : tHeight;
+        generate_particles(num_particles);
+    }
+
+    private void generate_particles(int num_particles) {
+        float bw = getBoxWidth();
+        for (int i = 0; i < (num_particles / 2); i++) {
+            double randx = Math.random() * (mWidth - 2 * bw * mScoring_cols) + mx + bw * mScoring_cols;
+            double randy = Math.random() * mHeight + my;
+            mParticles.add(new Particle(randx, randy, 0, 0));
+            double center = mx + mWidth / 2;
+            mParticles.add(new Particle(2 * center - randx, randy, 0, 0));
+        }
     }
 
     public int[] screen_to_grid(int x, int y){
@@ -85,6 +99,10 @@ public class Grid implements AppDrawable {
 
         for (GamePiece piece : mPieces) {
             piece.drawInBox(getLowerX(), getLowery(), getBoxWidth(), getBoxHeight(), renderer);
+        }
+
+        for (Particle particle : mParticles) {
+            particle.draw(renderer);
         }
     }
 
