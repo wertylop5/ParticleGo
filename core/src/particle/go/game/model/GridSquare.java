@@ -3,6 +3,7 @@ package particle.go.game.model;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 public class GridSquare {
     private int indexX;
@@ -21,7 +22,9 @@ public class GridSquare {
         mActor.setBounds(x, y, mRectangle.width, mRectangle.height);
         mActor.setX(x);
         mActor.setY(y);
-        //mActor.
+//        mActor.addListener(new InputListener() {
+//
+//        });
     }
 
     public void drawGamePiece(int gridX, int gridY, float width, float height,

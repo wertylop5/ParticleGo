@@ -33,15 +33,16 @@ public class ScoreCounter {
     public void addPlayerTwoScore(int score) {mPlayerTwoScore += score;}
 
     public void update(Stage stage) {
+        System.out.println("updating display");
         Label.LabelStyle style = new Label.LabelStyle();
         style.font = new BitmapFont();
 
         Label playerOneLabel = new Label("Score: " + mPlayerOneScore, style);
         Label playerTwoLabel = new Label("Score: " + mPlayerTwoScore, style);
-        playerOneLabel.setFontScale(10);
-        playerOneLabel.setPosition(500, 1000);
-        playerTwoLabel.setFontScale(10);
-        playerTwoLabel.setPosition(1000, 1000);
+        playerOneLabel.setFontScale(3);
+        playerOneLabel.setPosition(300, 1000);
+        playerTwoLabel.setFontScale(3);
+        playerTwoLabel.setPosition(1200, 1000);
 
         stage.addActor(playerOneLabel);
         stage.addActor(playerTwoLabel);

@@ -21,9 +21,11 @@ public class ParticleGo extends ApplicationAdapter{
 	private ShapeRenderer mRenderer;
 	private OrthographicCamera mCamera;
 	private Grid grid;
+	private ScoreCounter mCounter;
+	private Stage mStage;
 	private int p_turn = 0;
 	private int cur_turn = 1;
-	private int max_turns = 20;
+	private int max_turns = 5;
 	private boolean ended = false;
 
 	@Override
@@ -34,6 +36,8 @@ public class ParticleGo extends ApplicationAdapter{
 		mCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		grid = new Grid(10, 100, 100,
 				15, 8, 1, 20);
+		mCounter = new ScoreCounter(0, 0);
+		mStage = new Stage();
 
 		InputMultiplexer multiInput = new InputMultiplexer() {
 			@Override
@@ -112,6 +116,7 @@ public class ParticleGo extends ApplicationAdapter{
 			cur_turn++;
 			if (cur_turn > max_turns) {
 				end();
+				//mCounter.update(mStage);
 			}
 		} else
 			p_turn = 1;
@@ -121,6 +126,8 @@ public class ParticleGo extends ApplicationAdapter{
 		int[] scores = grid.count_scores();
 		for (int i = 0; i < scores.length; i++) {
 			System.out.printf("Player %d: score %d%n", i, scores[i]);
+			if (i == 0) mCounter.addPlayerOneScore(scores[0]);
+			else mCounter.addPlayerTwoScore(scores[1]);
 		}
 		ended = true;
 	}
@@ -140,9 +147,9 @@ public class ParticleGo extends ApplicationAdapter{
 		mRenderer.setProjectionMatrix(mCamera.combined);
 
 		grid.draw(mRenderer);
-		Stage stage = new Stage();
-		(new ScoreCounter(4, 1)).update(stage);
 
+		//(new ScoreCounter(4, 1)).update(stage);
+		if (ended) mCounter.update(mStage);
 	}
 	
 	@Override

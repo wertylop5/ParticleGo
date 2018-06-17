@@ -11,6 +11,7 @@ public class Grid implements AppDrawable {
     private Array<GamePiece> mPieces;
     public boolean[][] isPieceThere;
     private Array<Rectangle> mSquares;
+    //private Array<GridSquare> mSquares;
     private Actor mActor;
 
     private int mx;
@@ -27,6 +28,7 @@ public class Grid implements AppDrawable {
         mPieces = new Array<GamePiece>();
         isPieceThere = new boolean[xBoxes][yBoxes];
         mSquares = new Array<Rectangle>();
+        //mSquares = new Array<GridSquare>();
         mx = x;
         my = y;
         mXBoxes = xBoxes;
