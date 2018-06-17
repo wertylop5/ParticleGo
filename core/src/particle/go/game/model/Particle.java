@@ -9,7 +9,7 @@ public class Particle implements AppDrawable {
     private double[] velocity;
     private double mass = 1.0;
     private double charge = 1.0;
-    private double delta = 0.1;
+    private double delta = 1;
 
     Particle(double px, double py, double vx, double vy){
         position = new double[2];
@@ -38,13 +38,15 @@ public class Particle implements AppDrawable {
     public void updateParticle(Magnet magnet){
         double[] displacement = new double[2];
         for (int i = 0; i < 2; i++){
-            displacement[i] = position[i] - magnet.position[i];
+            displacement[i] = position[i] - magnet.positionScreen[i];
         }
-        double accel = (charge * magnet.charge / Math.pow(magnitude(displacement), 2)) / mass;
+        double accel = (2000000 * charge * magnet.charge / Math.pow(magnitude(displacement), 2)) / mass;
         normalize(displacement);
         for (int j = 0; j < 2; j++){
             velocity[j] += accel * delta * displacement[j];
         }
+        System.out.printf("%f", velocity[0]);
+        System.out.printf("%f", velocity[1]);
     }
 
     public void move(){

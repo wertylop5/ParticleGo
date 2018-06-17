@@ -23,7 +23,7 @@ public class ParticleGo extends ApplicationAdapter{
 	private Grid grid;
 	private int p_turn = 0;
 	private int cur_turn = 1;
-	private int max_turns = 10;
+	private int max_turns = 20;
 	private boolean ended = false;
 
 	@Override
@@ -32,7 +32,8 @@ public class ParticleGo extends ApplicationAdapter{
 		//img = new Texture("badlogic.jpg");
 		mRenderer = new ShapeRenderer();
 		mCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		grid = new Grid(200, 200, 8, 8, 1, 20);
+		grid = new Grid(10, 100, 100,
+				15, 8, 1, 20);
 
 		InputMultiplexer multiInput = new InputMultiplexer() {
 			@Override
