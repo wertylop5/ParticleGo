@@ -12,8 +12,8 @@ public class GridSquare {
         mRectangle = new Rectangle();
         mRectangle.x = x;
         mRectangle.y = y;
-        mRectangle.width = grid.getBoxWidth();
-        mRectangle.height = grid.getBoxHeight();
+        mRectangle.width = grid.mSide;
+        mRectangle.height = grid.mSide;
     }
 
     public void drawGamePiece(int gridX, int gridY, float width, float height,

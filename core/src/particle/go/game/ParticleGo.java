@@ -26,7 +26,8 @@ public class ParticleGo extends ApplicationAdapter{
 		//img = new Texture("badlogic.jpg");
 		mRenderer = new ShapeRenderer();
 		mCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		grid = new Grid(200, 200, 8, 8, 1, 20);
+		grid = new Grid(10, 100, 100,
+				15, 8, 1, 20);
 
 		InputMultiplexer multiInput = new InputMultiplexer() {
 			@Override
