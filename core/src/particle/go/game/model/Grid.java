@@ -99,7 +99,7 @@ public class Grid implements AppDrawable {
             for (GamePiece m : mPieces) {
                 p.updateParticle((Magnet)m);
             }
-            p.move();
+            p.move(this);
         }
     }
 
@@ -133,8 +133,8 @@ public class Grid implements AppDrawable {
     public int getLowerX() { return mx; }
     public int getLowery() { return my; }
 
-    public float getMaxX() { return mx+mXBoxes*mWidth; }
-    public float getMaxY() { return my+mYBoxes*mHeight; }
+    public float getMaxX() { return mx+mWidth; }
+    public float getMaxY() { return my+mHeight; }
 
     public Rectangle getSquare(int x, int y) {
         return mSquares.get(y*mYBoxes+x);

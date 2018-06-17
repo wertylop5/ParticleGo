@@ -49,9 +49,21 @@ public class Particle implements AppDrawable {
         System.out.printf("%f", velocity[1]);
     }
 
-    public void move(){
+    public void move(Grid grid){
         position[0] += velocity[0] * delta;
         position[1] += velocity[1] * delta;
+        System.out.printf("Initial value: %f, %f, %f, %f", position[0], position[1], grid.getMaxX(), grid.getMaxY());
+        if (position[0] > grid.getMaxX()) {
+            velocity[0] = 0;
+            position[0] = grid.getMaxX() - RADIUS;
+            System.out.printf("Modified x: %f, %f", position[0], position[1]);
+        }
+        else if (position[1] > grid.getMaxY()){
+            velocity[1] = 0;
+            position[1] = grid.getMaxY() - RADIUS;
+            System.out.printf("%f, Modified y: %f", position[0], position[1]);
+        }
+        System.out.printf("%f, Final: %f, %f, %f", position[0], position[1], grid.getMaxX(), grid.getMaxY());
     }
 
     @Override
