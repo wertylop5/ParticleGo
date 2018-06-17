@@ -40,6 +40,10 @@ public class Particle implements AppDrawable {
         for (int i = 0; i < 2; i++){
             displacement[i] = position[i] - magnet.positionScreen[i];
         }
+//        double mag = magnitude(displacement);
+////        if (mag < 1)
+////            for (int i = 0; i < 2; i++)
+////                displacement[i] /= mag;
         double accel = (2000000 * charge * magnet.charge / Math.pow(magnitude(displacement), 2)) / mass;
         normalize(displacement);
         for (int j = 0; j < 2; j++){

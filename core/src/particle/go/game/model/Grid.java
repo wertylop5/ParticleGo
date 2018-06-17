@@ -105,16 +105,26 @@ public class Grid implements AppDrawable {
 
     @Override
     public void draw(ShapeRenderer renderer) {
-        renderer.begin(ShapeRenderer.ShapeType.Line);
-        renderer.setColor(Color.WHITE);
         for (int x = 0; x < mXBoxes; x++) {
+            if (x < mScoring_cols) {
+                renderer.end();
+                renderer.begin(ShapeRenderer.ShapeType.Filled);
+                renderer.setColor(Color.FIREBRICK);
+            } else if (x >= mXBoxes - mScoring_cols) {
+                renderer.end();
+                renderer.begin(ShapeRenderer.ShapeType.Filled);
+                renderer.setColor(Color.ROYAL);
+            } else {
+                renderer.end();
+                renderer.begin(ShapeRenderer.ShapeType.Line);
+                renderer.setColor(Color.WHITE);
+            }
             for (int y = 0; y < mYBoxes; y++) {
                 Rectangle rect = new Rectangle();
                 rect.height = mSide;
                 rect.width = mSide;
                 rect.x = mx+x*mSide;
                 rect.y = my+y*mSide;
-
                 mSquares.add(rect);
                 renderer.rect(mx+x*mSide, my+y*mSide, mSide, mSide);
             }
