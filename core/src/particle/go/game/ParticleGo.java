@@ -39,7 +39,7 @@ public class ParticleGo extends ApplicationAdapter{
 				return true; // return true to indicate the event was handled
 			}
 		};
-		multiInput.addProcessor(new GestureDetector(new GestureDetector.GestureAdapter(){
+		/*multiInput.addProcessor(new GestureDetector(new GestureDetector.GestureAdapter(){
 			@Override
 			public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2,
 								 Vector2 pointer1, Vector2 pointer2) {
@@ -55,7 +55,7 @@ public class ParticleGo extends ApplicationAdapter{
 				mCamera.update();
 				return true;
 			}
-		}));
+		}));*/
         /*Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean touchDown (int x, int y, int pointer, int button) {
@@ -64,13 +64,13 @@ public class ParticleGo extends ApplicationAdapter{
                 return true; // return true to indicate the event was handled
             }
         });*/
-		Gdx.input.setInputProcessor(new GestureDetector(new GestureDetector.GestureAdapter() {
+		/*Gdx.input.setInputProcessor(new GestureDetector(new GestureDetector.GestureAdapter() {
 			@Override
 			public boolean zoom(float initialDistance, float distance) {
 				float change = -(distance - initialDistance);
-				/*if (change < 0) {
+				*//*if (change < 0) {
 					change = -(1/change);
-				}*/
+				}*//*
 				float percent = change / 300f;//max
 				System.out.println("change: " + change);
 				//System.out.println("change adjusted: " + (float)(10 - (10 - .05)*percent));
@@ -85,8 +85,8 @@ public class ParticleGo extends ApplicationAdapter{
 				mCamera.update();
 				return true;
 			}
-		}));
-		//Gdx.input.setInputProcessor(multiInput);
+		}));*/
+		Gdx.input.setInputProcessor(multiInput);
 	}
 
 	private float clamp(float min, float max, float val) {
