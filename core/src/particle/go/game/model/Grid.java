@@ -2,12 +2,14 @@ package particle.go.game.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 
 public class Grid implements AppDrawable {
     private Array<Particle> mParticles;
     private Array<GamePiece> mPieces;
     public boolean[][] isPieceThere;
+    private Array<Rectangle> mSquares;
 
     private int mx;
     private int my;
@@ -20,6 +22,7 @@ public class Grid implements AppDrawable {
         mParticles = new Array<Particle>();
         mPieces = new Array<GamePiece>();
         isPieceThere = new boolean[xBoxes][yBoxes];
+        mSquares = new Array<Rectangle>();
         mx = x;
         my = y;
         mXBoxes = xBoxes;
@@ -68,6 +71,13 @@ public class Grid implements AppDrawable {
         renderer.begin(ShapeRenderer.ShapeType.Line);
         for (int x = 0; x < mXBoxes; x++) {
             for (int y = 0; y < mYBoxes; y++) {
+                Rectangle rect = new Rectangle();
+                rect.height = boxHeight;
+                rect.width = boxWidth;
+                rect.x = mx+x*boxWidth;
+                rect.y = my+y*boxHeight;
+
+                mSquares.add(rect);
                 renderer.rect(mx+x*boxWidth, my+y*boxHeight, boxWidth, boxHeight);
             }
         }
@@ -86,4 +96,8 @@ public class Grid implements AppDrawable {
 
     public float getMaxX() { return mx+mXBoxes*mWidth; }
     public float getMaxY() { return my+mYBoxes*mHeight; }
+
+    public Rectangle getSquare(int x, int y) {
+        return mSquares.get(y*mYBoxes+x);
+    }
 }

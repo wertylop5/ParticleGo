@@ -37,6 +37,7 @@ public class ParticleGo extends ApplicationAdapter{
 			@Override
 			public boolean touchDown (int x, int y, int pointer, int button) {
 				System.out.println("touch down");
+				//if (grid.getSquare())
 				if (players[p_turn].turn(grid, x, y))
 					switch_turn();
 				return true; // return true to indicate the event was handled
