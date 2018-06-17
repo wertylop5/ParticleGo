@@ -14,11 +14,11 @@ public class Magnet implements GamePiece {
     }
 
     @Override
-    public void drawInBox(int gridX, int gridY, int boxX, int boxY, float width, float height, ShapeRenderer renderer) {
+    public void drawInBox(int gridX, int gridY, float width, float height, ShapeRenderer renderer) {
         renderer.setColor(Color.SALMON);
         renderer.begin(ShapeRenderer.ShapeType.Filled);
-        renderer.circle(gridX+boxX*width+(width/2), gridY+boxY*height+(height/2),
-                width/2);
+        renderer.circle(gridX + position[0] * width + (width / 2), gridY + position[1] * height + (height / 2),
+                width / 2);
         renderer.end();
     }
 }

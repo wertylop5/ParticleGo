@@ -72,10 +72,14 @@ public class Grid implements AppDrawable {
             }
         }
         renderer.end();
+
+        for (GamePiece piece : mPieces) {
+            piece.drawInBox(getLowerX(), getLowery(), getBoxWidth(), getBoxHeight(), renderer);
+        }
     }
 
-    public float getBoxWidth() { return (mWidth-mx)/ mXBoxes; }
-    public float getBoxHeight() { return (mHeight-my)/ mYBoxes; }
+    public float getBoxWidth() { return mWidth / mXBoxes; }
+    public float getBoxHeight() { return mHeight / mYBoxes; }
 
     public int getLowerX() { return mx; }
     public int getLowery() { return my; }
