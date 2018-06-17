@@ -5,11 +5,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 import particle.go.game.model.Grid;
+import particle.go.game.model.ScoreCounter;
 
 public class ParticleGo extends ApplicationAdapter{
 	//private SpriteBatch batch;
@@ -135,6 +139,9 @@ public class ParticleGo extends ApplicationAdapter{
 		mRenderer.setProjectionMatrix(mCamera.combined);
 
 		grid.draw(mRenderer);
+		Stage stage = new Stage();
+		(new ScoreCounter(4, 1)).update(stage);
+
 	}
 	
 	@Override

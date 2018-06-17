@@ -2,11 +2,13 @@ package particle.go.game.model;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class GridSquare {
     private int indexX;
     private int indexY;
     private Rectangle mRectangle;
+    private Actor mActor;
 
     public GridSquare(Grid grid, int x, int y) {
         mRectangle = new Rectangle();
@@ -14,6 +16,12 @@ public class GridSquare {
         mRectangle.y = y;
         mRectangle.width = grid.getBoxWidth();
         mRectangle.height = grid.getBoxHeight();
+
+        mActor = new Actor();
+        mActor.setBounds(x, y, mRectangle.width, mRectangle.height);
+        mActor.setX(x);
+        mActor.setY(y);
+        //mActor.
     }
 
     public void drawGamePiece(int gridX, int gridY, float width, float height,

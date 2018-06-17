@@ -3,6 +3,7 @@ package particle.go.game.model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 
 public class Grid implements AppDrawable {
@@ -10,6 +11,7 @@ public class Grid implements AppDrawable {
     private Array<GamePiece> mPieces;
     public boolean[][] isPieceThere;
     private Array<Rectangle> mSquares;
+    private Actor mActor;
 
     private int mx;
     private int my;
@@ -34,6 +36,11 @@ public class Grid implements AppDrawable {
         int tHeight = Gdx.graphics.getHeight() - my;
         mHeight = mWidth = tWidth < tHeight ? tWidth : tHeight;
         generate_particles(num_particles);
+
+        mActor = new Actor();
+        mActor.setX(mx);
+        mActor.setY(my);
+        mActor.setBounds(mx, my, mWidth, mHeight);
     }
 
     private void generate_particles(int num_particles) {
