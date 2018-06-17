@@ -6,8 +6,6 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.input.GestureDetector;
-import com.badlogic.gdx.math.Vector2;
 
 import particle.go.game.model.Grid;
 
@@ -19,7 +17,7 @@ public class ParticleGo extends ApplicationAdapter{
 	private Grid grid;
 	private int p_turn = 0;
 	private int cur_turn = 1;
-	private int max_turns = 10;
+	private int max_turns = 20;
 	private boolean ended = false;
 
 	@Override

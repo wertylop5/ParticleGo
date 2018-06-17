@@ -1,6 +1,7 @@
 package particle.go.game.model;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
@@ -62,8 +63,11 @@ public class Grid implements AppDrawable {
                 0 <= grid_y && grid_y < mYBoxes &&
                 !isPieceThere[grid_x][grid_y] &&
                 ((turn == 0 && grid_x < mXBoxes - mScoring_cols) ||
-                        (turn == 1 && mScoring_cols < grid_x))) {
-            mPieces.add(new Magnet(grid_x, grid_y));
+                        (turn == 1 && mScoring_cols <= grid_x))) {
+            Color color = Color.BLUE;
+            if (turn == 0)
+                color = color.RED;
+            mPieces.add(new Magnet(grid_x, grid_y, x, y, color));
             isPieceThere[grid_x][grid_y] = true;
             return true;
         }
@@ -96,6 +100,7 @@ public class Grid implements AppDrawable {
         float boxHeight = getBoxHeight();
 
         renderer.begin(ShapeRenderer.ShapeType.Line);
+        renderer.setColor(Color.WHITE);
         for (int x = 0; x < mXBoxes; x++) {
             for (int y = 0; y < mYBoxes; y++) {
                 Rectangle rect = new Rectangle();
