@@ -17,8 +17,9 @@ public class Grid implements AppDrawable {
     private int mHeight;
     private int mXBoxes;
     private int mYBoxes;
+    private int mScoring_cols;
 
-    public Grid(int x, int y, int xBoxes, int yBoxes) {
+    public Grid(int x, int y, int xBoxes, int yBoxes, int scoring_cols, int num_particles) {
         mParticles = new Array<Particle>();
         mPieces = new Array<GamePiece>();
         isPieceThere = new boolean[xBoxes][yBoxes];
@@ -27,10 +28,23 @@ public class Grid implements AppDrawable {
         my = y;
         mXBoxes = xBoxes;
         mYBoxes = yBoxes;
+        mScoring_cols = scoring_cols;
 
         int tWidth = Gdx.graphics.getWidth() - mx;
         int tHeight = Gdx.graphics.getHeight() - my;
         mHeight = mWidth = tWidth < tHeight ? tWidth : tHeight;
+        generate_particles(num_particles);
+    }
+
+    private void generate_particles(int num_particles) {
+        float bw = getBoxWidth();
+        for (int i = 0; i < (num_particles / 2); i++) {
+            double randx = Math.random() * (mWidth - 2 * bw * mScoring_cols) + mx + bw * mScoring_cols;
+            double randy = Math.random() * mHeight + my;
+            mParticles.add(new Particle(randx, randy, 0, 0));
+            double center = mx + mWidth / 2;
+            mParticles.add(new Particle(2 * center - randx, randy, 0, 0));
+        }
     }
 
     public int[] screen_to_grid(int x, int y){
@@ -40,13 +54,15 @@ public class Grid implements AppDrawable {
         return grid_coords;
     }
 
-    public boolean addMagnet(int x, int y) {
+    public boolean addMagnet(int x, int y, int turn) {
         int[] grid_coords = screen_to_grid(x, y);
         int grid_x = grid_coords[0];
         int grid_y = grid_coords[1];
         if (0 <= grid_x && grid_x < mXBoxes &&
                 0 <= grid_y && grid_y < mYBoxes &&
-                !isPieceThere[grid_x][grid_y]) {
+                !isPieceThere[grid_x][grid_y] &&
+                ((turn == 0 && grid_x < mXBoxes - mScoring_cols) ||
+                        (turn == 1 && mScoring_cols < grid_x))) {
             mPieces.add(new Magnet(grid_x, grid_y));
             isPieceThere[grid_x][grid_y] = true;
             return true;
@@ -54,12 +70,23 @@ public class Grid implements AppDrawable {
         return false;
     }
 
+    public int[] count_scores() {
+        int[] scores = new int[2];
+        for (Particle particle : mParticles) {
+            if (particle.position[0] < mx + getBoxWidth() * mScoring_cols)
+                scores[0]++;
+            else if (particle.position[0] > mx + mWidth - getBoxWidth() * mScoring_cols)
+                scores[1]++;
+        }
+        return scores;
+    }
+
     public void updateGrid() {
         for (Particle p : mParticles) {
             for (GamePiece m : mPieces) {
-                //p.updateParticle(m);
+                p.updateParticle((Magnet)m);
             }
-            //p.move();
+            p.move();
         }
     }
 
@@ -85,6 +112,10 @@ public class Grid implements AppDrawable {
 
         for (GamePiece piece : mPieces) {
             piece.drawInBox(getLowerX(), getLowery(), getBoxWidth(), getBoxHeight(), renderer);
+        }
+
+        for (Particle particle : mParticles) {
+            particle.draw(renderer);
         }
     }
 
