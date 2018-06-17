@@ -11,6 +11,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 import particle.go.game.model.Grid;
 import particle.go.game.model.ScoreCounter;
@@ -23,9 +24,10 @@ public class ParticleGo extends ApplicationAdapter{
 	private Grid grid;
 	private ScoreCounter mCounter;
 	private Stage mStage;
+	//private TextButton mTextButton;
 	private int p_turn = 0;
 	private int cur_turn = 1;
-	private int max_turns = 5;
+	private int max_turns = 20;
 	private boolean ended = false;
 
 	@Override
@@ -39,6 +41,14 @@ public class ParticleGo extends ApplicationAdapter{
 		mCounter = new ScoreCounter(0, 0);
 		mStage = new Stage();
 
+//		TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
+//		style.font = new BitmapFont();
+//		mTextButton = new TextButton("Toggle repel", style);
+//		mTextButton.setPosition(20, 20);
+		//mTextButton.scaleBy(100);
+		//mTextButton.setSize(100, 100);
+		//mStage.addActor(mTextButton);
+
 		InputMultiplexer multiInput = new InputMultiplexer() {
 			@Override
 			public boolean touchDown (int x, int y, int pointer, int button) {
@@ -48,53 +58,7 @@ public class ParticleGo extends ApplicationAdapter{
 				return true; // return true to indicate the event was handled
 			}
 		};
-		/*multiInput.addProcessor(new GestureDetector(new GestureDetector.GestureAdapter(){
-			@Override
-			public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2,
-								 Vector2 pointer1, Vector2 pointer2) {
-				float dX = pointer1.x - initialPointer1.x +
-						pointer2.x - initialPointer2.x;
-				float dY = pointer1.y - pointer1.y +
-						pointer2.y - initialPointer2.y;
-				float mag = (float)Math.sqrt(dX*dX + dY*dY);
 
-				System.out.println("Zoom: " + mCamera.zoom);
-				mCamera.zoom *= mag;
-				System.out.println("Zoom after: " + mCamera.zoom);
-				mCamera.update();
-				return true;
-			}
-		}));*/
-        /*Gdx.input.setInputProcessor(new InputAdapter() {
-            @Override
-            public boolean touchDown (int x, int y, int pointer, int button) {
-            	if (players[p_turn].turn(grid, x, y))
-					switch_turn();
-                return true; // return true to indicate the event was handled
-            }
-        });*/
-		/*Gdx.input.setInputProcessor(new GestureDetector(new GestureDetector.GestureAdapter() {
-			@Override
-			public boolean zoom(float initialDistance, float distance) {
-				float change = -(distance - initialDistance);
-				*//*if (change < 0) {
-					change = -(1/change);
-				}*//*
-				float percent = change / 300f;//max
-				System.out.println("change: " + change);
-				//System.out.println("change adjusted: " + (float)(10 - (10 - .05)*percent));
-				System.out.println("change adjusted: " + change/3000);
-
-				System.out.println("Zoom: " + mCamera.zoom);
-				mCamera.zoom += change/3000;
-				//mCamera.zoom = (float)(10 - (10 - .05)*percent);
-				System.out.println("zoom before clamp: " + mCamera.zoom);
-				mCamera.zoom = clamp(.5f, 10f, mCamera.zoom);
-				System.out.println("Zoom after: " + mCamera.zoom);
-				mCamera.update();
-				return true;
-			}
-		}));*/
 		Gdx.input.setInputProcessor(multiInput);
 	}
 
@@ -150,6 +114,8 @@ public class ParticleGo extends ApplicationAdapter{
 
 		//(new ScoreCounter(4, 1)).update(stage);
 		if (ended) mCounter.update(mStage);
+		//mStage.act();
+		//mStage.draw();
 	}
 	
 	@Override
