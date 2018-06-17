@@ -54,13 +54,15 @@ public class Grid implements AppDrawable {
         return grid_coords;
     }
 
-    public boolean addMagnet(int x, int y) {
+    public boolean addMagnet(int x, int y, int turn) {
         int[] grid_coords = screen_to_grid(x, y);
         int grid_x = grid_coords[0];
         int grid_y = grid_coords[1];
         if (0 <= grid_x && grid_x < mXBoxes &&
                 0 <= grid_y && grid_y < mYBoxes &&
-                !isPieceThere[grid_x][grid_y]) {
+                !isPieceThere[grid_x][grid_y] &&
+                ((turn == 0 && grid_x < mXBoxes - mScoring_cols) ||
+                        (turn == 1 && mScoring_cols < grid_x))) {
             mPieces.add(new Magnet(grid_x, grid_y));
             isPieceThere[grid_x][grid_y] = true;
             return true;
@@ -68,12 +70,23 @@ public class Grid implements AppDrawable {
         return false;
     }
 
+    public int[] count_scores() {
+        int[] scores = new int[2];
+        for (Particle particle : mParticles) {
+            if (particle.position[0] < mx + getBoxWidth() * mScoring_cols)
+                scores[0]++;
+            else if (particle.position[0] > mx + mWidth - getBoxWidth() * mScoring_cols)
+                scores[1]++;
+        }
+        return scores;
+    }
+
     public void updateGrid() {
         for (Particle p : mParticles) {
             for (GamePiece m : mPieces) {
-                //p.updateParticle(m);
+                p.updateParticle((Magnet)m);
             }
-            //p.move();
+            p.move();
         }
     }
 

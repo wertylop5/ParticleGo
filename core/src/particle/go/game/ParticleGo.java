@@ -10,7 +10,6 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 
 import particle.go.game.model.Grid;
-import particle.go.game.model.Player;
 
 public class ParticleGo extends ApplicationAdapter{
 	//private SpriteBatch batch;
@@ -18,8 +17,10 @@ public class ParticleGo extends ApplicationAdapter{
 	private ShapeRenderer mRenderer;
 	private OrthographicCamera mCamera;
 	private Grid grid;
-	private Player[] players;
 	private int p_turn = 0;
+	private int cur_turn = 1;
+	private int max_turns = 10;
+	private boolean ended = false;
 
 	@Override
 	public void create () {
@@ -28,17 +29,13 @@ public class ParticleGo extends ApplicationAdapter{
 		mRenderer = new ShapeRenderer();
 		mCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		grid = new Grid(200, 200, 8, 8, 1, 20);
-		players = new Player[2];
-		for (int i = 0; i < 2; i++)
-			players[i] = new Player();
 
 		InputMultiplexer multiInput = new InputMultiplexer() {
 			@Override
 			public boolean touchDown (int x, int y, int pointer, int button) {
 				System.out.println("touch down");
-				//if (grid.getSquare())
-				if (players[p_turn].turn(grid, x, y))
-					switch_turn();
+				if (!ended)
+					turn(grid, x, y);
 				return true; // return true to indicate the event was handled
 			}
 		};
@@ -98,12 +95,31 @@ public class ParticleGo extends ApplicationAdapter{
 		return val;
 	}
 
-	private void switch_turn() {
-		if (p_turn == 1)
+	private void turn(Grid grid, int x, int y) {
+		if (grid.addMagnet(x, y, p_turn))
+			next_turn();
+	}
+
+	private void next_turn() {
+		if (p_turn == 1) {
 			p_turn = 0;
-		else
+			grid.updateGrid();
+			cur_turn++;
+			if (cur_turn > max_turns) {
+				end();
+			}
+		} else
 			p_turn = 1;
 	}
+
+	private void end() {
+		int[] scores = grid.count_scores();
+		for (int i = 0; i < scores.length; i++) {
+			System.out.printf("Player %d: score %d%n", i, scores[i]);
+		}
+		ended = true;
+	}
+
 
 	@Override
 	public void render () {

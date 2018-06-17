@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 public class Particle implements AppDrawable {
     private static final float RADIUS = 10f;
 
-    private double[] position;
+    public double[] position;
     private double[] velocity;
     private double mass = 1.0;
     private double charge = 1.0;
